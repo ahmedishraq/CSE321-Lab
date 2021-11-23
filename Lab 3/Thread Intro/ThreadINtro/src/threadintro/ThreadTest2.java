@@ -7,6 +7,10 @@ package threadintro;
 
 class MyThread extends Thread{
     
+    public MyThread(String name){
+        super(name);
+    }
+    
     @Override
     public void run(){
         System.out.println("Hello World");
@@ -16,7 +20,7 @@ class MyThread extends Thread{
 
 public class ThreadTest2 {
     public static void main(String [] args){
-        MyThread myThread = new MyThread();
+        MyThread myThread = new MyThread("My Thread 1");
         myThread.start();
     }
 }

@@ -12,17 +12,17 @@ class CalculationThread extends Thread {
 
     private Thread t;
     private String operation;
-    private int a = 10;
-    private int b = 5;
+    private int a;
+    private int b;
     private int addition_rst = 0;
     private int subtraction_rst = 0;
     private int multiplication_rst = 0;
     private int division_rst = 0;
 
-    public CalculationThread(String operation) {
+    public CalculationThread(String operation,int a, int b) {
         this.operation = operation;
-        //this.a=a;
-        //this.b=b;
+        this.a = a;
+        this.b = b;
     }
 
     @Override
@@ -59,16 +59,27 @@ class CalculationThread extends Thread {
 public class Task1 {
 
     public static void main(String[] args) {
-        CalculationThread add = new CalculationThread("add");
-        CalculationThread sub = new CalculationThread("sub");
-        CalculationThread mul = new CalculationThread("mul");
-        CalculationThread div = new CalculationThread("div");
-        CalculationThread oth = new CalculationThread("matrix");
+        
+        Scanner sc = new Scanner(System.in);
+        
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        CalculationThread add = new CalculationThread("add",a,b);
+        int c = sc.nextInt();
+        int d = sc.nextInt();
+        CalculationThread sub = new CalculationThread("sub",c,d);
+        int e = sc.nextInt();
+        int f = sc.nextInt();
+        CalculationThread mul = new CalculationThread("mul",e,f);
+        int g = sc.nextInt();
+        int h = sc.nextInt();
+        CalculationThread div = new CalculationThread("div",g,h);
+       // CalculationThread oth = new CalculationThread("matrix");
         
         add.start();
         sub.start();
         mul.start();
         div.start();
-        oth.start();
+        //oth.start();
     }
 }

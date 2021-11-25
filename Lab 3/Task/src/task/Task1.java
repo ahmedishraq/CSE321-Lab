@@ -38,7 +38,7 @@ public class Task1 {
         Thread add = new Thread(new MyThread(){
             @Override
             public void run(){
-            System.out.println("HI");
+            //System.out.println("HI");
             int a = sc.nextInt();
             int b = sc.nextInt();
             int rst = a + b;
@@ -46,6 +46,17 @@ public class Task1 {
             }
         });
         add.start();
+        
+        Thread sub = new Thread(new MyThread(){
+            @Override
+            public void run(){
+                int a = sc.nextInt();
+                int b = sc.nextInt();
+                int rst = a - b;
+                System.out.println("Subtraction result is: "+rst);
+            }
+        });
+        sub.start();
         //a = sc.nextInt();
         //b = sc.nextInt();
         

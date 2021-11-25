@@ -12,17 +12,15 @@ class CalculationThread extends Thread {
 
     private Thread t;
     private String operation;
-    private int a;
-    private int b;
+    private int a = 10;
+    private int b =5;
     private int addition_rst = 0;
     private int subtraction_rst = 0;
     private int multiplication_rst = 0;
     private int division_rst = 0;
 
-    public CalculationThread(String operation,int a, int b) {
+    public CalculationThread(String operation) {
         this.operation = operation;
-        this.a = a;
-        this.b = b;
     }
 
     @Override
@@ -45,12 +43,10 @@ class CalculationThread extends Thread {
         } else if (operation == "mul") {
             multiplication_rst = a * b;
             System.out.println("Calculation: " + operation + " of " + a + " * " + b + " = " + multiplication_rst + "\n");
-        }
-        else if (operation == "div") {
+        } else if (operation == "div") {
             division_rst = a / b;
             System.out.println("Calculation: " + operation + " of " + a + " / " + b + " = " + division_rst + "\n");
-        }
-        else{
+        } else {
             System.out.println("No valid operation");
         }
     }
@@ -59,27 +55,16 @@ class CalculationThread extends Thread {
 public class Task1 {
 
     public static void main(String[] args) {
-        
-        Scanner sc = new Scanner(System.in);
-        
-        int a = sc.nextInt();
-        int b = sc.nextInt();
-        CalculationThread add = new CalculationThread("add",a,b);
-        int c = sc.nextInt();
-        int d = sc.nextInt();
-        CalculationThread sub = new CalculationThread("sub",c,d);
-        int e = sc.nextInt();
-        int f = sc.nextInt();
-        CalculationThread mul = new CalculationThread("mul",e,f);
-        int g = sc.nextInt();
-        int h = sc.nextInt();
-        CalculationThread div = new CalculationThread("div",g,h);
-       // CalculationThread oth = new CalculationThread("matrix");
-        
+        CalculationThread add = new CalculationThread("add");
+        CalculationThread sub = new CalculationThread("sub");
+        CalculationThread mul = new CalculationThread("mul");
+        CalculationThread div = new CalculationThread("div");
+        CalculationThread oth = new CalculationThread("matrix");
+
         add.start();
         sub.start();
         mul.start();
         div.start();
-        //oth.start();
+        oth.start();
     }
 }

@@ -6,17 +6,37 @@ import java.util.Scanner;
  * @author ahmed_ishraq
  */
 
-class MyThread implements Runnable{
+
+class CalculationThread extends Thread{
     
+    static Scanner sc = new Scanner(System.in);
     
-//    public MyThread(String name){
-//        super(name);
-//    }
+    private Thread t;
+    private String operation;
+    private int a;
+    private int b;
+    private int addition_rst = 0;
+    private int subtraction_rst = 0;
+    private int multiplication_rst = 0;
+    
+    public CalculationThread(String operation, int a, int b){
+        this.operation = operation;
+        this.a=a;
+        this.b=b;
+    }
+    
+    @Override
+    public void start(){
+        System.out.println("Calculation of "+operation+"\n");
+        if(t == null){
+            t = new Thread(this, operation);
+            t.start();
+        }
+    }
     
     @Override
     public void run(){
-        //System.out.println("Hello World");
-        System.out.println("Current Thread name is: "+ Thread.currentThread().getName()+" "+"Enter your input");
+        
     }
 }
 
@@ -24,45 +44,6 @@ class MyThread implements Runnable{
 
 public class Task1 {
     public static void main(String [] args){
-        
-        Scanner sc = new Scanner(System.in);
-        int a;
-        int b;
-        
-        //MyThread myThread1 = new MyThread("add");
-//        MyThread myThread2 = new MyThread("sub");
-//        MyThread myThread3 = new MyThread("mul");
-//        MyThread myThread4 = new MyThread("div");
-//        MyThread myThread5 = new MyThread("oth");
-
-        Thread add = new Thread(new MyThread(){
-            @Override
-            public void run(){
-            //System.out.println("HI");
-            int a = sc.nextInt();
-            int b = sc.nextInt();
-            int rst = a + b;
-            System.out.println("Addition result is: "+rst);
-            }
-        });
-        add.start();
-        
-        Thread sub = new Thread(new MyThread(){
-            @Override
-            public void run(){
-                int a = sc.nextInt();
-                int b = sc.nextInt();
-                int rst = a - b;
-                System.out.println("Subtraction result is: "+rst);
-            }
-        });
-        sub.start();
-        //a = sc.nextInt();
-        //b = sc.nextInt();
-        
-//        myThread2.start();
-//        myThread3.start();
-//        myThread4.start();
-//        myThread5.start();
+      
     }
 }

@@ -40,10 +40,19 @@ public class Task2 {
         hl.start();
         hb.start();
         
+        try{
+        hs.join();
+        hl.join();
+        hb.join();
+        }
+        catch(InterruptedException e){
+            e.printStackTrace();
+        }
+        
         if(hs.isAlive()){
             System.out.println("Not Today!");
         }
-        else if(!hb.isAlive()){
+        if(!hb.isAlive()){
             System.out.println("You know nothing!");
         }
         

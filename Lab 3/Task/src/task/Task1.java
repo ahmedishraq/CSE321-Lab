@@ -12,8 +12,8 @@ class CalculationThread extends Thread {
 
     private Thread t;
     private String operation;
-    private int a = 10;
-    private int b =5;
+    private int a;
+    private int b;
     private int addition_rst = 0;
     private int subtraction_rst = 0;
     private int multiplication_rst = 0;
@@ -25,10 +25,18 @@ class CalculationThread extends Thread {
 
     @Override
     public void start() {
-        //System.out.println("Calculation of " + operation + "\n");
+        try{
         if (t == null) {
+            Thread.sleep(500);
+            System.out.println("User Input for operation: ");
+            a = sc.nextInt();
+            b = sc.nextInt();
             t = new Thread(this, operation);
             t.start();
+        }
+        }
+        catch(InterruptedException e){
+            e.printStackTrace();
         }
     }
 
@@ -59,7 +67,7 @@ public class Task1 {
         CalculationThread sub = new CalculationThread("sub");
         CalculationThread mul = new CalculationThread("mul");
         CalculationThread div = new CalculationThread("div");
-        CalculationThread oth = new CalculationThread("matrix");
+        CalculationThread oth = new CalculationThread("oth");
 
         add.start();
         sub.start();

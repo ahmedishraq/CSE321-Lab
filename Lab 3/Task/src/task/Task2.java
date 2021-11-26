@@ -30,7 +30,22 @@ public class Task2 {
         hs.setPriority(Thread.MAX_PRIORITY);
         hb.setPriority(Thread.MIN_PRIORITY);
         
+        hs.run();
+        ht.run();
+        hl.run();
+        hb.run();
+        
         hs.start();
+        htl.start();
+        hl.start();
+        hb.start();
+        
+        if(hs.isAlive()){
+            System.out.println("Not Today!");
+        }
+        else if(!hb.isAlive()){
+            System.out.println("You know nothing!");
+        }
         
     }
 }

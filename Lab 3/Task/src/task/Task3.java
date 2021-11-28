@@ -1,128 +1,109 @@
-package task;
-
-/**
- *
- * @author ahmed_ishraq
- */
-class CustomThread extends Thread {
-
-    private Thread t;
-    private String check;
-    private int f_odd_mean = 0;
-    private int f_odd_sum = 0;
-    private int f_even_mean = 0;
-    private int f_even_sum = 0;
-    private int s_odd_mean = 0;
-    private int s_odd_sum = 0;
-    private int s_even_mean = 0;
-    private int s_even_sum = 0;
-    private int avg = 0;
-    //private long arr [] = new long[51];
-    int arr[] = new int [50];
-
-    public void fib() {
-        //int arr[] = new int[50];
-        int n = 50, first = 0, next = 1;
-        System.out.print("The first " + n + " Fibonacci numbers are: ");
-        arr[0] = 0;
-        arr[1] = 1;
-        int j = 2;
-        for (int i = 1; i <= n - 2; ++i) {
-            int sum = first + next;
-            first = next;
-            next = sum;
-            arr[j] = sum;
-            j++;
-        }
-
-        for (int i = 0; i < 50; i++) {
-            System.out.print(arr[i] + " ");
-        }
-    }
-
-    public CustomThread(String check){
-        this.check = check;
-   }
-    @Override
-    public void start() {
-        if (t == null) {
-            t = new Thread(this, check);
-            t.start();
-        }
-    }
-    
-    public void first(){
-        for(int i=1;i<25;i=i+2){
-            f_odd_sum += arr[i];
-        }
-        f_odd_mean = f_odd_sum/25;
-        //System.out.println("mean:"+ mean);
-    }
-    
-    public void second(){
-        for(int i=0;i<25;i=i+2){
-            f_even_sum += arr[i];
-        }
-        f_even_mean = f_even_sum/25;
-        //System.out.println("mean:"+ mean);
-    }
-    
-    public void third(){
-        for(int i=26;i<50;i=i+2){
-            s_odd_sum += arr[i];
-        }
-        s_odd_mean = s_odd_sum/25;
-        //System.out.println("mean:"+ mean);
-    }
-    
-    public void four(){
-        for(int i=26;i<50;i=i+2){
-            s_even_sum += arr[i];
-        }
-        s_even_mean = s_even_sum/25;
-        //System.out.println("mean:"+ mean);
-    }
-    
-    public void five(){
-        avg = f_odd_mean + f_even_mean + s_odd_mean + s_even_mean;
-        avg = avg/4;
-        System.out.println(avg);
-    }
-
-    @Override
-    public void run() {
-        if(check == "first"){
-            first();
-        }
-        else if(check == "second"){
-            second();
-        }
-        else if(check == "third"){
-            third();
-        }
-        else if(check == "four"){
-            four();
-        }
-        else if(check == "five"){
-            five();
-        }
-    }
-}
 
 public class Task3 {
+    static long fibarray[] = new long[50];
+    static double[] mean = new double[4];
+
+    static long fib(int n) {
+        long a = 0, b = 1, c;
+        if (n == 0)
+            return a;
+        for (int i = 2; i <= n; i++) {
+            c = a + b;
+            a = b;
+            b = c;
+        }
+        return b;
+    }
 
     public static void main(String[] args) {
-        CustomThread c1 = new CustomThread("first");
-        CustomThread c2 = new CustomThread("second");
-        CustomThread c3 = new CustomThread("third");
-        CustomThread c4 = new CustomThread("four");
-        CustomThread c5 = new CustomThread("five");
-        
-        c1.start();
-        c2.start();
-        c3.start();
-        c4.start();
-        c5.start();
 
+        for (int i = 0; i < 50; i++) {
+            fibarray[i] = fib(i);
+        }
+
+        Thread f1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                long temp1 = 0;
+                double count1 = 0;
+                for (int i = 0; i < 25; i++) {
+                    if (fibarray[i] % 2 != 0) {
+                        count1++;
+                        temp1 = temp1 + fibarray[i];
+                    }
+                }
+                mean[0] = (double) temp1 / count1;
+            }
+        }, "oddMeanFirst");
+
+        Thread f2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                long temp2 = 0;
+                double count2 = 0;
+                for (int i = 0; i < 25; i++) {
+                    if (fibarray[i] % 2 == 0) {
+                        count2++;
+                        temp2 = temp2 + fibarray[i];
+                    }
+                }
+                mean[1] = (double) temp2 / count2;
+            }
+        }, "evenMeanFirst");
+        Thread f3 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                long temp3 = 0;
+                double count3 = 0;
+                for (int i = 25; i < 50; i++) {
+                    if (fibarray[i] % 2 != 0) {
+                        count3++;
+                        temp3 = temp3 + fibarray[i];
+                    }
+                }
+                mean[2] = (double) temp3 / count3;
+            }
+        }, "oddMeanSecond");
+        Thread f4 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                long temp4 = 0;
+                double count4 = 0;
+                for (int i = 25; i < 50; i++) {
+                    if (fibarray[i] % 2 == 0) {
+                        count4++;
+                        temp4 = temp4 + fibarray[i];
+                    }
+                }
+                mean[3] = (double) temp4 / count4;
+            }
+        }, "evenMeanSecond");
+
+        f1.start();
+        f2.start();
+        f3.start();
+        f4.start();
+
+        try {
+            f1.join();
+            f2.join();
+            f3.join();
+            f4.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Thread f5 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                double result = 0.0;
+                for (int i = 0; i < 4; i++) {
+                    result = result + mean[i];
+                }
+                System.out.println("The special integer is " + (int) (result / 4.0));
+            }
+        }, "avgMean");
+
+        f5.start();
     }
 }

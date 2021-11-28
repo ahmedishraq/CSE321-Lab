@@ -1,3 +1,16 @@
+package task;
+
+/**
+ *
+ * @author ahmed_ishraq
+ */
+
+class CustomThread implements Runnable{
+    @Override
+    public void run(){
+        
+    }
+}
 
 public class Task3 {
     static long fibarray[] = new long[50];

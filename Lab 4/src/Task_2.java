@@ -20,7 +20,6 @@ public class Task_2 {
         int response_time[] = new int[total_process];
         int turnaround_time[] = new int[total_process];
         int waiting_time[] = new int[total_process];
-        int flag[] = new int[total_process];
         
         float sum_waiting_time = 0;
         float avg_waiting_time = 0;

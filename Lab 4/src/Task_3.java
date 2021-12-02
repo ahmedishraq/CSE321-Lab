@@ -57,7 +57,7 @@ public class Task_3 {
                                 t = t + q;
                                 rem_burst_time[i] = rem_burst_time[i] - q;
                                 rem_arrival_time[i] = rem_arrival_time[i] + q;
-                                seq += "->" + p[i];
+                                //seq += "->" + p[i];
                             } else {
 
                                 // for last time 
@@ -156,9 +156,9 @@ public class Task_3 {
         System.out.println("Sequence is like that " + seq);
     }
 
-    // Driver Code 
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the nimber of process: ");
         int total_process = sc.nextInt();
         // name of the process 
         int pid[] = new int [total_process];
@@ -172,12 +172,16 @@ public class Task_3 {
         // taking  all input
         for(int i=0;i<total_process;i++){
             pid[i] = i+1;
+            System.out.print("Process "+pid[i]+" Arival Time: ");
             arrival_time[i] = sc.nextInt();
+            System.out.print("Process "+pid[i]+" Burst Time: ");
             burst_time[i] = sc.nextInt();
         }
 
         // quantum time of each process 
+        System.out.print("Time Quantum: ");
         int time_quantum = sc.nextInt();
+        System.out.println("");
 
         // cal the function for output 
         roundRobin(pid, arrival_time, burst_time, time_quantum);

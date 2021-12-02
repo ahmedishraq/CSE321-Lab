@@ -10,10 +10,12 @@ public class Task_2 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the number of Process: ");
+        System.out.print("Total number of Process: ");
         int total_process = sc.nextInt();
         int pid[] = new int[total_process];
+        int arrival_time []= new int[total_process];
         int brust_time[] = new int[total_process];
+        int rem_brust_time [] = new int [total_process];
         int priority[] = new int[total_process];
         int start_time[] = new int[total_process];
         int finish_time[] = new int[total_process];
@@ -27,8 +29,13 @@ public class Task_2 {
         float avg_turnaround_time = 0;
 
         for (int i = 0; i < pid.length; i++) {
-            pid[i] = sc.nextInt();
+            pid[i] = i+1;
+            System.out.print("Process "+pid[i]+" Arival Time: ");
+            arrival_time[i] = sc.nextInt();
+            System.out.print("Process "+pid[i]+" Burst Time: ");
             brust_time[i] = sc.nextInt();
+            rem_brust_time[i] = brust_time[i];
+            System.out.print("Process "+pid[i]+" Priority: ");
             priority[i] = sc.nextInt();
         }
         for (int i = 0; i < total_process - 1; i++) {
@@ -73,10 +80,5 @@ public class Task_2 {
         avg_turnaround_time = sum_turnaround_time/total_process;
         System.out.println("Avarage waiting time: "+ avg_waiting_time);
         System.out.println("Avarage trunaround time: "+ avg_turnaround_time);
-        
-
-//        for (int i = 0; i < total_process; i++) {
-//            System.out.println(pid[i] + " " + brust_time[i] + " " + priority[i] + " " + start_time[i] + " " + finish_time[i]);
-//        }
     }
 }

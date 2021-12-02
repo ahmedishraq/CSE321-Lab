@@ -9,32 +9,36 @@ public class Task_3 {
 
 // Java program to implement Round Robin 
 // Scheduling with different arrival time 
-    public static void roundRobin(int p[], int a[], int b[], int n) {
+    public static void roundRobin(int p[], int a[], int b[], int q) {
         // result of average times 
-        int res = 0;
-        int resc = 0;
+        float avg_waiting_time = 0;
+        float avg_turnaround_time = 0;
+        float avg_ft = 0;
 
         // for sequence storage 
         String seq = new String();
 
         // copy the burst array and arrival array 
         // for not effecting the actual array 
-        int res_b[] = new int[b.length];
-        int res_a[] = new int[a.length];
+        int rem_burst_time[] = new int[b.length];
+        int rem_arrival_time[] = new int[a.length];
 
-        for (int i = 0; i < res_b.length; i++) {
-            res_b[i] = b[i];
-            res_a[i] = a[i];
+        for (int i = 0; i < rem_burst_time.length; i++) {
+            rem_burst_time[i] = b[i];
+            rem_arrival_time[i] = a[i];
         }
+        
+        //testing 
+        int ft [] = new int[p.length];
 
         // critical time of system 
         int t = 0;
 
         // for store the waiting time 
-        int w[] = new int[p.length];
+        int waiting_time[] = new int[p.length];
 
         // for store the Completion time 
-        int comp[] = new int[p.length];
+        int finish_time[] = new int[p.length];
 
         while (true) {
             boolean flag = true;
@@ -43,54 +47,54 @@ public class Task_3 {
                 // these condition for if 
                 // arrival is not on zero 
                 // check that if there come before qtime 
-                if (res_a[i] <= t) {
-                    if (res_a[i] <= n) {
-                        if (res_b[i] > 0) {
+                if (rem_arrival_time[i] <= t) {
+                    if (rem_arrival_time[i] <= q) {
+                        if (rem_burst_time[i] > 0) {
                             flag = false;
-                            if (res_b[i] > n) {
+                            if (rem_burst_time[i] > q) {
 
                                 // make decrease the b time 
-                                t = t + n;
-                                res_b[i] = res_b[i] - n;
-                                res_a[i] = res_a[i] + n;
+                                t = t + q;
+                                rem_burst_time[i] = rem_burst_time[i] - q;
+                                rem_arrival_time[i] = rem_arrival_time[i] + q;
                                 seq += "->" + p[i];
                             } else {
 
                                 // for last time 
-                                t = t + res_b[i];
+                                t = t + rem_burst_time[i];
 
                                 // store comp time 
-                                comp[i] = t - a[i];
+                                finish_time[i] = t - a[i];
 
                                 // store wait time 
-                                w[i] = t - b[i] - a[i];
-                                res_b[i] = 0;
+                                waiting_time[i] = t - b[i] - a[i];
+                                rem_burst_time[i] = 0;
 
                                 // add sequence 
-                                seq += "->" + p[i];
+                                //seq += "->" + p[i];
                             }
                         }
-                    } else if (res_a[i] > n) {
+                    } else if (rem_arrival_time[i] > q) {
 
                         // is any have less arrival time 
                         // the coming process then execute them 
                         for (int j = 0; j < p.length; j++) {
 
                             // compare 
-                            if (res_a[j] < res_a[i]) {
-                                if (res_b[j] > 0) {
+                            if (rem_arrival_time[j] < rem_arrival_time[i]) {
+                                if (rem_burst_time[j] > 0) {
                                     flag = false;
-                                    if (res_b[j] > n) {
-                                        t = t + n;
-                                        res_b[j] = res_b[j] - n;
-                                        res_a[j] = res_a[j] + n;
+                                    if (rem_burst_time[j] > q) {
+                                        t = t + q;
+                                        rem_burst_time[j] = rem_burst_time[j] - q;
+                                        rem_arrival_time[j] = rem_arrival_time[j] + q;
                                         seq += "->" + p[j];
                                     } else {
-                                        t = t + res_b[j];
-                                        comp[j] = t - a[j];
-                                        w[j] = t - b[j] - a[j];
-                                        res_b[j] = 0;
-                                        seq += "->" + p[j];
+                                        t = t + rem_burst_time[j];
+                                        finish_time[j] = t - a[j];
+                                        waiting_time[j] = t - b[j] - a[j];
+                                        rem_burst_time[j] = 0;
+                                        //seq += "->" + p[j];
                                     }
                                 }
                             }
@@ -98,26 +102,26 @@ public class Task_3 {
 
                         // now the previous porcess according to 
                         // ith is process 
-                        if (res_b[i] > 0) {
+                        if (rem_burst_time[i] > 0) {
                             flag = false;
 
                             // Check for greaters 
-                            if (res_b[i] > n) {
-                                t = t + n;
-                                res_b[i] = res_b[i] - n;
-                                res_a[i] = res_a[i] + n;
+                            if (rem_burst_time[i] > q) {
+                                t = t + q;
+                                rem_burst_time[i] = rem_burst_time[i] - q;
+                                rem_arrival_time[i] = rem_arrival_time[i] + q;
                                 seq += "->" + p[i];
                             } else {
-                                t = t + res_b[i];
-                                comp[i] = t - a[i];
-                                w[i] = t - b[i] - a[i];
-                                res_b[i] = 0;
-                                seq += "->" + p[i];
+                                t = t + rem_burst_time[i];
+                                finish_time[i] = t - a[i];
+                                waiting_time[i] = t - b[i] - a[i];
+                                rem_burst_time[i] = 0;
+                               // seq += "->" + p[i];
                             }
                         }
                     }
                 } // if no process is come on thse critical 
-                else if (res_a[i] > t) {
+                else if (rem_arrival_time[i] > t) {
                     t++;
                     i--;
                 }
@@ -127,20 +131,28 @@ public class Task_3 {
                 break;
             }
         }
+                
+        // testing 
+        for(int i=0;i<p.length;i++){
+            ft[i] =finish_time[i] + a[i]; 
+        }
+        //
 
-        System.out.println("name  ctime  wtime");
+        System.out.println("pid  arrival  brust  finish  turn  waiting");
         for (int i = 0; i < p.length; i++) {
-            System.out.println(" " + p[i] + "    " + comp[i]
-                    + "    " + w[i]);
-
-            res = res + w[i];
-            resc = resc + comp[i];
+            System.out.println(p[i]+"\t"+a[i]+"\t"+b[i]+"\t"+ft[i]+"\t"+finish_time[i]+"\t"+waiting_time[i]);
+            avg_waiting_time += waiting_time[i];
+            avg_turnaround_time += finish_time[i];
+            avg_ft += ft[i];
         }
 
+         System.out.println("");
         System.out.println("Average waiting time is "
-                + (float) res / p.length);
-        System.out.println("Average compilation  time is "
-                + (float) resc / p.length);
+                + (float) avg_waiting_time / p.length);
+         System.out.println("Average turnaround  time is "
+                + (float) avg_turnaround_time / p.length);
+        System.out.println("Average finish  time is "
+                + (float) avg_ft / p.length);
         System.out.println("Sequence is like that " + seq);
     }
 

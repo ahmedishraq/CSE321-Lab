@@ -33,7 +33,6 @@ public class Task_1 {
             System.out.print("Process "+pid[i]+" Arival Time: ");
             arrival_time[i] = sc.nextInt();
             System.out.print("Process "+pid[i]+" Burst Time: ");
-            System.out.println("");
             brust_time[i] = sc.nextInt();
             rem_brust_time[i] = brust_time[i];
             flag[i] = 0;
@@ -78,6 +77,7 @@ public class Task_1 {
             avg_turnaround_time += turnaround_time[i];
             avg_response_time += response_time[i];
         }
+        System.out.println("");
         System.out.println("pid  arrival  brust  start  finish  response  turn  waiting");
         for(int i=0;i<total_process;i++){
             System.out.println(pid[i]+"\t"+arrival_time[i]+"\t"+brust_time[i]+"\t"+start_time[i]+"\t"+finish_time[i]+"\t"+response_time[i]+"\t"+turnaround_time[i]+"\t"+waiting_time[i]);

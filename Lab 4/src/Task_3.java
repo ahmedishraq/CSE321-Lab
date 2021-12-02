@@ -158,7 +158,7 @@ public class Task_3 {
 
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter the nimber of process: ");
+        System.out.print("Total number of process: ");
         int total_process = sc.nextInt();
         // name of the process 
         int pid[] = new int [total_process];

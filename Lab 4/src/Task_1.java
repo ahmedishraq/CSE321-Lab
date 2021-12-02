@@ -8,7 +8,9 @@ public class Task_1 {
     public static void main(String [] args){
         Scanner sc = new Scanner (System.in);
         
+        System.out.print("Enter total nimber of Process: ");
         int total_process = sc.nextInt();
+        
         int pid [] = new int [total_process];
         int arrival_time [] = new int [total_process];
         int brust_time [] = new int [total_process];
@@ -28,7 +30,9 @@ public class Task_1 {
         
         for(int i=0;i<total_process;i++){
             pid[i] = i+1;
+            System.out.print("Process "+pid[i]+" Arival Time: ");
             arrival_time[i] = sc.nextInt();
+            System.out.print("Process "+pid[i]+" Burst Time: ");
             brust_time[i] = sc.nextInt();
             rem_brust_time[i] = brust_time[i];
             flag[i] = 0;

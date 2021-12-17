@@ -42,14 +42,14 @@ class QuestionBuffer {
      * 5. Remove the string from the list,
      * 6. Return the value
      */
-    
     if(pointer == -1){
         wait();
     }
     String a = registers.get(pointer);
     pointer--;
     registers.remove(a);
-    return a;
+
+    return "";
   }
 
   public synchronized void writeQuestionToReg(String value) throws InterruptedException {
@@ -60,11 +60,7 @@ class QuestionBuffer {
      * 3. Increase the pointer by 1.
      * 4. If the pointer is at 0, it indicates first item in the list. So, wakeup StudentThread [using notifyAll()].
      */
-    registers.add(value);
-    pointer++;
-    if(pointer == 0){
-        notifyAll();
-    }
+   
   }
 }
 
@@ -139,7 +135,7 @@ public class LabTask{
     studentThread.stop();
     
 //TO-DO: Print the buffer pointer. 
-System.out.println(questionBuffer.pointer);
+
 
   }
 }

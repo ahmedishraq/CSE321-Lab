@@ -1,4 +1,0 @@
-QuestionBuffer
-StudentThread
-LabTask
-TeacherThread

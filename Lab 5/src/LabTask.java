@@ -49,7 +49,7 @@ class QuestionBuffer {
     pointer--;
     registers.remove(a);
 
-    return "";
+    return a;
   }
 
   public synchronized void writeQuestionToReg(String value) throws InterruptedException {

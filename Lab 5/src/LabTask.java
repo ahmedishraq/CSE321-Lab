@@ -139,6 +139,7 @@ public class LabTask{
     studentThread.stop();
     
 //TO-DO: Print the buffer pointer. 
+System.out.println(questionBuffer.pointer);
 
 
   }

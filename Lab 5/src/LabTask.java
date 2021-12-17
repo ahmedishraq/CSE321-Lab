@@ -60,7 +60,11 @@ class QuestionBuffer {
      * 3. Increase the pointer by 1.
      * 4. If the pointer is at 0, it indicates first item in the list. So, wakeup StudentThread [using notifyAll()].
      */
-   
+    registers.add(value);
+    pointer++;
+    if(pointer == 0){
+        notifyAll();
+    }
   }
 }
 

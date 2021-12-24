@@ -9,7 +9,7 @@ import java.util.*;
 public class BankersAlgorithm {
 
     public static void main(String[] args) throws Exception {
-        BufferedReader b = new BufferedReader(new FileReader("bankers1.txt"));
+        BufferedReader b = new BufferedReader(new FileReader("bankers.txt"));
         int row = Integer.parseInt(b.readLine());
         int column = Integer.parseInt(b.readLine());
         String[] process = new String[row];
